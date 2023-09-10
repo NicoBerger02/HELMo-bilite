@@ -1,0 +1,62 @@
+﻿@page
+@model ChauffeurProfileModel
+@{
+	ViewData["Title"] = "Mon profil";
+	ViewData["ActivePage"] = ManageNavPages.Index;
+}
+
+<h3 class="text-center">@ViewData["Title"]</h3>
+<partial name="_StatusMessage" for="StatusMessage" />
+<div class="row justify-content-center">
+	<div class="col-12 col-xl-8">
+		<form id="profile-form" method="post" enctype="multipart/form-data">
+
+			<input asp-for="Input.Chauffeur.Id" type="hidden" />
+			<input asp-for="Input.Chauffeur.Email" type="hidden" />
+
+			<div class="form-floating mb-3">
+				<input asp-for="Input.Chauffeur.Matricule" class="form-control mb-3" placeholder="Matricule">
+				<label asp-for="Input.Chauffeur.Matricule">Matricule</label>
+				<span asp-validation-for="Input.Chauffeur.Matricule" class="text-danger text-start d-block"></span>
+			</div>
+
+			<div class="row">
+				<div class="col-md-6 mb-3">
+					<div class="form-floating">
+						<input asp-for="Input.Chauffeur.Name" class="form-control mb-3" placeholder="Nom">
+						<label asp-for="Input.Chauffeur.Name">Nom</label>
+						<span asp-validation-for="Input.Chauffeur.Name" class="text-danger text-start d-block"></span>
+					</div>
+				</div>
+				<div class="col-md-6 mb-3">
+					<div class="form-floating">
+						<input asp-for="Input.Chauffeur.FirstName" class="form-control mb-3" placeholder="Prénom">
+						<label asp-for="Input.Chauffeur.FirstName">Prénom</label>
+						<span asp-validation-for="Input.Chauffeur.FirstName" class="text-danger text-start d-block"></span>
+					</div>
+				</div>
+			</div>
+
+			<div class="form-floating">
+				<input asp-for="Input.Chauffeur.BirthDate" type="date" class="form-control mb-3" />
+				<label asp-for="Input.Chauffeur.BirthDate">Date de naissance</label>
+				<span asp-validation-for="Input.Chauffeur.BirthDate" class="text-danger text-start d-block"></span>
+			</div>
+
+			<div class="mb-3">
+				<label class="form-label" asp-for="Input.ProfileImageUploaded">Changer la photo de profil :</label>
+				<input asp-for="Input.ProfileImageUploaded" type="file" class="form-control" accept=".jpg, .jpeg, .png, .gif" />
+			</div>
+
+			<p>Vos licenses : @Model.Licenses</p>
+
+			<div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+			<button id="update-profile-chauffeur-button" type="submit" class="w-100 btn btn-lg btn-dark">Enregistrer</button>
+		</form>
+	</div>
+</div>
+
+@section Scripts {
+	<partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Helmobilite.Models.Truck>
+
+@{
+	ViewData["Title"] = "Gestion de la flotte";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<a class="btn btn-dark my-3" asp-action="Create">Nouveau camion <i class="fas fa-plus"></i></a>
+
+<div class="row">
+	@foreach (var truck in Model)
+	{
+		<div class="col-12 col-lg-6 col-xl-4 mb-3">
+			<div class="card h-100 bg-light">
+				<div class="text-center">
+					<img class="my-2 truck-logo img-fluid img-thumbnail rounded-circle" src="~/images/uploads/trucks/@(truck.ImageName ?? "default-icon-truck.jpg")" alt="Logo du camion">
+				</div>
+				<div class="card-body">
+					<h5 class="card-title text-center">@truck.LicensePlate</h5>
+					<ul class="list-group">
+						<li class="list-group-item list-group-item-light">
+							<p><strong>@Html.DisplayNameFor(model => model.Brand)</strong> : <span class="float-end">@Html.DisplayFor(modelItem => truck.Brand)</span></p>
+						</li>
+						<li class="list-group-item list-group-item-light">
+							<p><strong>@Html.DisplayNameFor(model => model.Model)</strong> : <span class="float-end">@Html.DisplayFor(modelItem => truck.Model)</span></p>
+						</li>
+						<li class="list-group-item list-group-item-light">
+							<p><strong>@Html.DisplayNameFor(model => model.License)</strong> : <span class="float-end">@Html.DisplayFor(modelItem => truck.License)</span></p>
+						</li>
+						<li class="list-group-item list-group-item-light">
+							<p><strong>@Html.DisplayNameFor(model => model.Payload)</strong> : <span class="float-end">@Html.DisplayFor(modelItem => truck.Payload)</span></p>
+						</li>
+					</ul>
+				</div>
+				<div class="card-footer bg-transparent">
+					<div class="row justify-content-between">
+						<a class="btn btn-dark col-5" asp-action="Edit" asp-route-id="@truck.Id"><i class="fas fa-pen"></i></a>
+						<a class="btn btn-danger col-5" data-bs-toggle="modal" data-bs-target="#confirmDeletion-@truck.Id"><i class="fas fa-trash"></i></a>
+						<partial name="_DeleteConfirmationModalPartial" model=truck />
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>

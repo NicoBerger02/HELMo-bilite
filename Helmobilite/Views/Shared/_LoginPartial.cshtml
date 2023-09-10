@@ -1,0 +1,139 @@
+﻿@using Microsoft.AspNetCore.Identity
+@using Helmobilite.Models
+
+@inject SignInManager<ApplicationUser> SignInManager
+@inject UserManager<ApplicationUser> UserManager
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark px-3 mb-3">
+	<a class="navbar-brand d-lg-none" asp-controller="Home" asp-action="Index">Helmo-bilité</a>
+	
+	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggle" aria-controls="navbarToggle" aria-expanded="false" aria-label="Toggle navigation">
+		<span class="navbar-toggler-icon"></span>
+	</button>
+
+	<div class="collapse navbar-collapse justify-content-between" id="navbarToggle">
+		<ul class="navbar-nav">
+			@if (SignInManager.IsSignedIn(User))
+			{
+				if (User.IsInRole(nameof(Role.Client)))
+				{
+					<li class="nav-item">
+								<a id="manage" class="nav-link" asp-controller="Deliveries" asp-action="ClientIndex">Demandes de livraisons <i class="fas fa-truck-fast"></i></a>
+					</li>
+					<li class="nav-item">
+						<a id="manage" class="nav-link" asp-controller="Client" asp-action="DeliveryHistory">Historique des livraisons <i class="fas fa-history"></i></a>
+					</li>
+				}
+				if (User.IsInRole(nameof(Role.Chauffeur)))
+				{
+					<li class="nav-item">
+						<a id="manage" class="nav-link" asp-controller="Deliveries" asp-action="ChauffeurIndex">Mon horaire <i class="fas fa-calendar"></i></a>
+					</li>
+				}
+				if (User.IsInRole(nameof(Role.Dispatcher)))
+				{
+					<li class="nav-item">
+						<a id="manage" class="nav-link" asp-controller="Deliveries" asp-action="DispatcherIndex">Gestion des livraisons <i class="fas fa-truck-fast"></i></a>
+					</li>
+				}
+				if (User.IsInRole(nameof(Role.Administrateur)))
+				{
+					<li class="nav-item">
+						<a id="manage" class="nav-link" asp-controller="Admin" asp-action="Statistics">Statistiques <i class="fas fa-chart-simple"></i></a>
+					</li>
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+							Gestion <i class="fas fa-gear"></i>
+						</a>
+						<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<li><a class="dropdown-item" asp-controller="Admin" asp-action="ManageLicenses"><i class="fas fa-id-card me-1"></i>Permis</a></li>
+							<li><a class="dropdown-item" asp-controller="Admin" asp-action="ManageClients"><i class="fas fa-user me-1"></i>Clients</a></li>
+							<li><a class="dropdown-item" asp-controller="Admin" asp-action="ManageTrucks"><i class="fas fa-truck me-1"></i>Flotte</a></li>
+						</ul>
+					</li>
+				}
+			}
+			else
+			{
+				<li class="nav-item">
+					<a class="nav-link" href="~/Home#partners">Nos Partenaires</a>
+				</li>
+				<li class="nav-item dropdown">
+					<a class="nav-link dropdown-toggle" href="#" id="aboutdropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+						À propos
+					</a>
+					<ul class="dropdown-menu" aria-labelledby="aboutdropdown">
+						<li><a class="dropdown-item" href="~/Home#teams">Nos équipes</a>
+						<li><a class="dropdown-item" href="~/Home#trucks">Notre flotte</a>
+						<li><a class="dropdown-item" href="~/Home#knowhow">Notre savoir-faire</a>
+					</ul>
+				</li>
+			}
+		</ul>
+
+		<a class="navbar-brand d-none d-lg-block" asp-controller="Home" asp-action="Index">Helmo-bilité</a>
+
+		<ul class="navbar-nav">
+			@if (SignInManager.IsSignedIn(User))
+			{
+				<li class="nav-item">
+					<a id="manage" class="nav-link" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Mon compte <i class="fas fa-user-circle"></i></a>
+				</li>
+				<li class="nav-item">
+					<form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
+						<button id="logout" type="submit" class="nav-link btn btn-link">Se déconnecter <i class="fas fa-sign-out"></i></button>
+					</form>
+				</li>
+			}
+			else
+			{
+				<li class="nav-item">
+					<a class="nav-link" id="signup" href="" data-bs-toggle="modal" data-bs-target="#registerModal">Inscription</a>
+				</li>
+				<li class="nav-item">
+					<a class="nav-link" id="login" asp-area="Identity" asp-page="/Account/Login">Connexion</a>
+				</li>
+			}
+		</ul>
+	</div>
+</nav>
+
+<div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-xl" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="registerModalLabel">Inscription - Sélection du rôle</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<div class="container">
+					<div class="row">
+						<div class="col-xl-4">
+							<div class="card card-role-signup card-client">
+								<h3>Client</h3>
+								<p>Simplifiez vos livraisons avec l'HELMobilité.</p>
+								<a class="btn btn-dark" asp-area="Identity" asp-page="/Account/Register" asp-route-selectedRole="@Role.Client.GetEnumDisplayName()">S'inscrire</a>
+							</div>
+						</div>
+						<div class="col-xl-4">
+							<div class="card card-role-signup card-chauffeur">
+								<h3>Chauffeur</h3>
+								<p>Prenez la route avec l'HELMobilité.</p>
+								<a class="btn btn-dark" asp-area="Identity" asp-page="/Account/Register" asp-route-selectedRole="@Role.Chauffeur.GetEnumDisplayName()">S'inscrire</a>
+							</div>
+						</div>
+						<div class="col-xl-4">
+							<div class="card card-role-signup card-dispatcher">
+								<h3>Dispatcher</h3>
+								<p>Coordonnez les livraisons avec l'HELMobilité.</p>
+								<a class="btn btn-dark" asp-area="Identity" asp-page="/Account/Register" asp-route-selectedRole="@Role.Dispatcher.GetEnumDisplayName()">S'inscrire</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+

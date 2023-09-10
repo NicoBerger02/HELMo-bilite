@@ -1,0 +1,20 @@
+﻿@using Helmobilite.Models
+
+@model IEnumerable<Delivery>
+
+@{
+	ViewData["Title"] = "Historique des livraisons effectuées";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="_AntiCsrfTokenPartial" />
+
+<h1>@ViewData["Title"]</h1>
+
+<partial name="_ClientTableDeliveriesPartial" />
+
+<a class="btn mt-3" asp-action="ClientIndex"><i class="fas fa-arrow-left"></i> Retour</a>
+
+@section Scripts {
+	<script src="~/js/client-delivery-modal.js"></script>
+}

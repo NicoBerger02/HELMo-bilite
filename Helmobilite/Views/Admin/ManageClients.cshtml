@@ -1,0 +1,42 @@
+﻿@using Helmobilite.Models
+
+@model IEnumerable<Client>
+
+@{
+	ViewData["Title"] = "Liste des clients ayant fait une demande de livaison";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="mb-3">@ViewData["Title"]</h1>
+<hr />
+
+<div class="row">
+	@foreach (var client in Model)
+	{
+		<div class="col-12 col-lg-6 col-xl-4 mb-3">
+			<div class="card h-100 bg-light">
+				<div class="text-center">
+					<img class="my-2 truck-logo img-fluid img-thumbnail rounded-circle" src="~/images/uploads/users/@(client.ImageName ?? "default-icon-logo.png")" alt="Logo de l'entreprise">
+				</div>
+				<div class="card-body">
+					<h5 class="card-title text-center">@client.Enterprise</h5>
+					<ul class="list-group">
+						<li class="list-group-item list-group-item-light">
+							<h6 class="h6">Contact</h6>
+							<p>@Html.DisplayFor(modelItem => client.Email)</p>
+						</li>
+						<li class="list-group-item list-group-item-light">
+							<h6 class="h6">Adresse</h6>
+							<p>@client.Address.ToString()</p>
+						</li>
+					</ul>
+				</div>
+				<div class="card-footer bg-transparent">
+					<div class="row justify-content-center">
+						<a class="btn btn-dark col-8" asp-action="@(client.IsBadPayer ? "MarkAsGoodPayer" : "MarkAsBadPayer")" asp-route-id="@client.Id">@(client.IsBadPayer ? "Marquer comme bon payeur" : "Marquer comme mauvais payeur")</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>

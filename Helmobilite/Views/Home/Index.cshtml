@@ -1,0 +1,112 @@
+﻿@using Helmobilite.Models.ViewModels
+@model HomePageViewModel
+
+<section id="home" class="d-sm-flex d-lg-flex flex-sm-column flex-lg-row justify-content-lg-between align-items-sm-center mb-5 bg-light p-5">
+	<div class="home-text d-flex flex-column justify-content-center">
+		<h1>HELMobilité - Votre partenaire de confiance dans le transport routier de marchandises.</h1>
+		<p class="lead">Simplifiez et optimisez vos livraisons grâce à notre plateforme en ligne innovante. Profitez d'une visibilité complète sur vos demandes de livraison et le planning de nos chauffeurs expérimentés. Avec l'HELMo, bénéficiez d'une logistique fluide, d'une exécution précise et d'une expérience de livraison transparente.</p>
+	</div>
+	<img class="home-img" src="~/images/home.png" />
+</section>
+
+<section id="teams" class="mb-5 p-3">
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-10 col-xl-8 text-center">
+			<h4 class="mb-4">Nos équipes</h4>
+			<p class="lead mb-4 pb-2 mb-md-5 pb-md-0">
+				Notre équipe d'experts dévoués et passionnés est prête à répondre à tous vos besoins logistiques, assurant des livraisons efficaces et personnalisées à chaque étape du processus.
+			</p>
+		</div>
+	</div>
+	<div class="row text-center">
+		<div class="col-md-6 mb-4 mb-md-0">
+			<div class="d-flex justify-content-center mb-4">
+				<img src="~/images/uploads/users/@Model.DispatcherPhoto" class="rounded-circle" width="100" height="100" />
+			</div>
+			<p class="my-3 text-muted">
+				"Ma mission est de synchroniser chaque livraison avec une précision absolue. Du point de départ à la destination finale, je veille à ce que vos marchandises arrivent à bon port, à temps et en toute sécurité."
+			</p>
+			<p class="mb-0"><b>@Model.DispatcherName</b>, Dispatcher Helmo-bilité</p>
+		</div>
+		<div class="col-md-6 mb-0">
+			<div class="d-flex justify-content-center mb-4">
+				<img src="~/images/uploads/users/@Model.ChauffeurPhoto" alt="Photo chauffeur" class="rounded-circle" width="100" height="100" />
+			</div>
+			<p class="my-3 text-muted">
+				"Au volant de mon camion, je veille à ce que vos livraisons arrivent en toute sécurité et à temps. En tant que chauffeur, ma mission est de garantir des livraisons impeccables et une satisfaction totale."
+			</p>
+			<p class="mb-0"><b>@Model.ChauffeurName</b>, Chauffeur Helmo-bilité</p>
+		</div>
+	</div>
+</section>
+
+<section id="trucks" class="bg-light mb-5 p-3">
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-10 col-xl-8 text-center">
+			<h4 class="mb-4">Notre flotte</h4>
+			<p class="lead mb-4 pb-2 mb-md-5 pb-md-0">
+				Nous disposons d'une flotte moderne et diversifiée de camions parfaitement adaptés au transport routier de marchandises, garantissant des livraisons rapides et fiables, où que vous soyez.
+			</p>
+		</div>
+	</div>
+	<div id="carouselTrucks" class="carousel slide p-1" data-bs-ride="carousel">
+		<div class="carousel-inner">
+			@foreach (var group in Model.TruckGroups)
+			{
+				<div class="carousel-item @(group.Index == 0 ? "active" : "")" data-bs-interval="3000">
+					<div class="d-flex justify-content-evenly">
+						@foreach (var imageViewModel in group.ImageViewModels)
+						{
+							<img class="truck-image" src="~/images/uploads/trucks/@imageViewModel.LogoPath" alt="Logo @imageViewModel.Description">
+						}
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>
+
+<section id="knowhow" class="container mb-5 p-3">
+	<div class="row">
+		<div class="col-md-8">
+			<div class="row align-items-center h-100">
+				<div class="col">
+					<h4>Notre savoir-faire</h4>
+					<p class="lead">
+						Fort de notre expérience éprouvée dans l'industrie du transport, nous mettons à profit notre savoir-faire pour optimiser vos livraisons, offrant des solutions logistiques sur mesure et des résultats qui dépassent vos attentes.
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-4 mb-3 mb-md-0 text-center">
+			<img src="~/images/know_how.png" width="300" />
+		</div>
+	</div>
+</section>
+
+<section id="partners" class="bg-light">
+	<div class="row d-flex justify-content-center">
+		<div class="col-md-10 col-xl-8 text-center">
+			<h4 class="mb-4">Nos partenaires</h4>
+			<p class="mb-4 pb-2 mb-md-5 pb-md-0">
+				Nos partenaires de confiance comptent sur HELMo-bilité pour des livraisons réussies dans divers secteurs.
+			</p>
+		</div>
+	</div>
+
+	<div id="carouselPartners" class="carousel slide p-1" data-bs-ride="carousel">
+		<div class="carousel-inner">
+			@foreach (var group in Model.EnterpriseGroups)
+			{
+				<div class="carousel-item @(group.Index == 0 ? "active" : "")" data-bs-interval="3000">
+					<div class="d-flex justify-content-evenly">
+						@foreach (var imageViewModel in group.ImageViewModels)
+						{
+							<img class="partner-logo" src="~/images/uploads/users/@imageViewModel.LogoPath" alt="Logo @imageViewModel.Description">
+						}
+					</div>
+				</div>
+			}
+		</div>
+	</div>
+</section>

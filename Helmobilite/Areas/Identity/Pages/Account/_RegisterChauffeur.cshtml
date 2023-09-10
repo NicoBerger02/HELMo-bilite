@@ -1,0 +1,70 @@
+﻿@model RegisterModel
+
+<div>
+	<img src="~/images/chauffeur-icon-signup.png" class="img-fluid img-thumbnail rounded-circle mb-3" width="175" alt="avatar">
+</div>
+<h2 class="mb-3">@Role.Chauffeur.GetEnumDisplayName()</h2>
+
+<div asp-validation-summary="ModelOnly" class="text-danger custom-summary"></div>
+
+<div id="chauffeurForm">
+	<div class="form-floating mb-3">
+		<input asp-for="Input.ChauffeurModel.Email" class="form-control mb-3" placeholder="Email" />
+		<label asp-for="Input.ChauffeurModel.Email">Email</label>
+		<span asp-validation-for="Input.ChauffeurModel.Email" class="text-danger text-start d-block"></span>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 mb-3">
+			<div class="form-floating">
+				<input asp-for="Input.ChauffeurModel.Password" class="form-control mb-3" placeholder="Mot de passe">
+				<label asp-for="Input.ChauffeurModel.Password">Mot de passe</label>
+				<span asp-validation-for="Input.ChauffeurModel.Password" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+		<div class="col-md-6 mb-3">
+			<div class="form-floating">
+				<input asp-for="Input.ChauffeurModel.ConfirmPassword" class="form-control mb-3" placeholder="Confirmation">
+				<label asp-for="Input.ChauffeurModel.ConfirmPassword">Confirmation</label>
+				<span asp-validation-for="Input.ChauffeurModel.ConfirmPassword" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-floating mb-3">
+		<input asp-for="Input.ChauffeurModel.Matricule" class="form-control mb-3" placeholder="Matricule">
+		<label asp-for="Input.ChauffeurModel.Matricule">Matricule</label>
+		<span asp-validation-for="Input.ChauffeurModel.Matricule" class="text-danger text-start d-block"></span>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6  mb-3">
+			<div class="form-floating">
+				<input asp-for="Input.ChauffeurModel.Name" class="form-control mb-3" placeholder="Nom">
+				<label asp-for="Input.ChauffeurModel.Name">Nom</label>
+				<span asp-validation-for="Input.ChauffeurModel.Name" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+		<div class="col-md-6 mb-3">
+			<div class="form-floating">
+				<input asp-for="Input.ChauffeurModel.FirstName" class="form-control mb-3" placeholder="Prénom">
+				<label asp-for="Input.ChauffeurModel.FirstName">Prénom</label>
+				<span asp-validation-for="Input.ChauffeurModel.FirstName" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="text-start mb-3">
+		@Html.LabelFor(model => model.SelectedLicenses, "Choisissez les permis en votre possession :", new { @class = "mb-2"})
+		<i id="licenseTip" class="fas fa-circle-question" data-toggle="tooltip" title="Vous devez être en possession d'un permis de type C pour vous inscrire en tant que chauffeur."></i>
+		
+		@for (int i = 0; i < Model.SelectedLicenses.Count; i++)
+		{
+			<div class="form-check">
+				@Html.CheckBoxFor(m => m.SelectedLicenses[i].IsChecked, new { id = "license_" + Model.SelectedLicenses[i].Text, @class = "form-check-input" })
+				@Html.HiddenFor(m => m.SelectedLicenses[i].Text)
+				@Html.DisplayFor(m => m.SelectedLicenses[i].Text)
+			</div>
+		}
+	</div>
+</div>

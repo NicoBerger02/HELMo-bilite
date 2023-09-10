@@ -1,0 +1,87 @@
+﻿@model RegisterModel
+
+<div>
+	<img src="~/images/client-icon-signup.png" class="img-fluid img-thumbnail rounded-circle mb-3" width="175" alt="avatar">
+</div>
+<h2 class="mb-3">@Role.Client.GetEnumDisplayName()</h2>
+
+<div asp-validation-summary="ModelOnly" class="text-danger custom-summary"></div>
+
+<div id="clientForm">
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-floating mb-3">
+				<input asp-for="Input.ClientModel.Enterprise" class="form-control mb-3" placeholder="Nom de l'entreprise">
+				<label asp-for="Input.ClientModel.Enterprise">Nom de l'entreprise</label>
+				<span asp-validation-for="Input.ClientModel.Enterprise" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-floating mb-3">
+				<input asp-for="Input.ClientModel.Email" class="form-control mb-3" placeholder="name@example.com">
+				<label asp-for="Input.ClientModel.Email">Adresse email du contact</label>
+				<span asp-validation-for="Input.ClientModel.Email" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-floating">
+				<input asp-for="Input.ClientModel.Password" class="form-control mb-3" placeholder="Mot de passe">
+				<label asp-for="Input.ClientModel.Password">Mot de passe</label>
+				<span asp-validation-for="Input.ClientModel.Password" class="text-danger text-start d-block mb-3"></span>
+
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-floating">
+				<input asp-for="Input.ClientModel.ConfirmPassword" class="form-control mb-3" placeholder="Confirmation">
+				<label asp-for="Input.ClientModel.ConfirmPassword">Confirmation</label>
+				<span asp-validation-for="Input.ClientModel.ConfirmPassword" class="text-danger text-start d-block mb-3"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-floating">
+				<input asp-for="Input.ClientModel.StreetAddress" class="form-control mb-3" placeholder="Rue">
+				<label asp-for="Input.ClientModel.StreetAddress">Rue</label>
+				<span asp-validation-for="Input.ClientModel.StreetAddress" class="text-danger text-start d-block mb-3"></span>
+
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-floating">
+				<input asp-for="Input.ClientModel.NumberAddress" class="form-control mb-3" placeholder="Numéro">
+				<label asp-for="Input.ClientModel.NumberAddress">Numéro</label>
+				<span asp-validation-for="Input.ClientModel.NumberAddress" class="text-danger text-start d-block mb-3"></span>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6">
+			<div class="form-floating">
+				<input asp-for="Input.ClientModel.PostCodeAddress" class="form-control mb-3" placeholder="Code Postal">
+				<label asp-for="Input.ClientModel.PostCodeAddress">Code Postal</label>
+				<span asp-validation-for="Input.ClientModel.PostCodeAddress" class="text-danger text-start d-block mb-3"></span>
+			</div>
+		</div>
+		<div class="col-md-6">
+			<div class="form-floating">
+				<input asp-for="Input.ClientModel.LocalityAddress" class="form-control mb-3" placeholder="Localité">
+				<label asp-for="Input.ClientModel.LocalityAddress">Localité</label>
+				<span asp-validation-for="Input.ClientModel.LocalityAddress" class="text-danger text-start d-block mb-3"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-floating mb-3">
+		<input asp-for="Input.ClientModel.CountryAddress" class="form-control mb-3" placeholder="Pays">
+		<label asp-for="Input.ClientModel.CountryAddress">Pays</label>
+		<span asp-validation-for="Input.ClientModel.CountryAddress" class="text-danger text-start d-block mb-3"></span>
+	</div>
+</div>

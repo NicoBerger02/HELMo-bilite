@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<title>Helmo-bilité</title>
+	<environment include="Development">
+		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+		<link href="~/jqueryui/themes/base/jquery-ui.css" rel="stylesheet" />
+		<link href="~/css/all.css" rel="stylesheet" />
+	</environment>
+	<environment exclude="Development">
+		<link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+		<link href="~/mylib/style.css" rel="stylesheet" />
+		<link href="~/jqueryui/themes/base/jquery-ui.min.css" rel="stylesheet" />
+		<link href="~/css/all.min.css" rel="stylesheet" />
+	</environment>
+	<link rel="stylesheet" href="~/Helmobilite.styles.css" asp-append-version="true" />
+</head>
+<body>
+	<header>
+		<partial name="_LoginPartial" />
+	</header>
+	<div class="container pb-3">
+		<main role="main">
+			@RenderBody()
+		</main>
+	</div>
+
+	<footer class="border-top footer text-muted bg-dark">
+		<div class="container text-center">
+			&copy; 2023 - Helmo-bilité
+		</div>
+	</footer>
+
+	<environment include="Development">
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.js"></script>
+		<script src="~/lib/jquery/dist/jquery.js"></script>
+		<script src="~/jqueryui/jquery-ui.js"></script>
+		<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+	</environment>
+	<environment exclude="Development">
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"></script>
+		<script src="~/lib/jquery/dist/jquery.min.js"></script>
+		<script src="~/jqueryui/jquery-ui.min.js"></script>
+		<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+		<script src="~/mylib/all.min.js"></script>
+	</environment>
+
+	@await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

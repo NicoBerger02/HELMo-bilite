@@ -1,0 +1,28 @@
+﻿@model Helmobilite.Models.Delivery
+
+<input asp-for="ClientId" type="hidden" value="@ViewBag.ClientId" />
+<div class="form-group mb-3">
+    <label asp-for="LoadingPlace" class="control-label"></label>
+    <input asp-for="LoadingPlace" class="form-control mb-3" />
+    <span asp-validation-for="LoadingPlace" class="text-danger"></span>
+</div>
+<div class="form-group mb-3">
+    <label asp-for="UnloadingPlace" class="control-label"></label>
+    <input asp-for="UnloadingPlace" class="form-control mb-3" />
+    <span asp-validation-for="UnloadingPlace" class="text-danger"></span>
+</div>
+<div class="form-group mb-3">
+    <label asp-for="LoadingDateTime" class="control-label"></label>
+    <input asp-for="LoadingDateTime" class="form-control mb-3" />
+    <span asp-validation-for="LoadingDateTime" class="text-danger"></span>
+</div>
+<div class="form-group mb-3">
+    <label asp-for="UnloadingDateTime" class="control-label"></label>
+    <input asp-for="UnloadingDateTime" class="form-control mb-3" />
+    <span asp-validation-for="UnloadingDateTime" class="text-danger"></span>
+</div>
+<div class="form-group mb-3">
+    <label asp-for="Content" class="control-label"></label>
+    <input asp-for="Content" class="form-control mb-3" />
+    <span asp-validation-for="Content" class="text-danger"></span>
+</div>

@@ -1,0 +1,140 @@
+html {
+    font-size: 14px;
+}
+
+@media (min-width: 768px) {
+    html {
+        font-size: 16px;
+    }
+}
+
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+body {
+    margin-bottom: 60px;
+}
+
+#partners {
+    padding-top: 3%;
+    padding-bottom: 3%;
+}
+
+#teams b {
+    text-transform: uppercase;
+}
+
+.partner-logo, .truck-image {
+    width: 15%;
+    height: auto;
+    margin: 20px 20px;
+}
+
+.custom-summary ul li {
+    list-style-type: none;
+    text-align: center
+}
+
+.card-role-signup {
+    border-radius: 4px;
+    box-shadow: 0 6px 10px rgba(0,0,0,.08), 0 0 6px rgba(0,0,0,.05);
+    padding: 15px 80px 15px 35px;
+    cursor: pointer;
+}
+
+    .card-role-signup:hover {
+        transform: scale(1.05);
+        box-shadow: 0 10px 20px rgba(0,0,0,.12), 0 4px 8px rgba(0,0,0,.06);
+    }
+
+    .card-role-signup h3 {
+        font-weight: 600;
+    }
+
+    .card-role-signup img {
+        position: absolute;
+        top: 20px;
+        right: 15px;
+        max-height: 100px;
+    }
+
+.card-client {
+    background-image: url(../images/client-icon-signup.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80px;
+}
+
+.card-chauffeur {
+    background-image: url(../images/chauffeur-icon-signup.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80px;
+}
+
+.card-dispatcher {
+    background-image: url(../images/dispatcher-icon-signup.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80px;
+}
+
+.dispatcher-client-logo, .truck-logo {
+    width: 120px;
+    height: auto
+}
+
+.action-link {
+    text-decoration: none;
+    color: inherit;
+}
+
+.action-link:hover {
+    color: inherit;
+}
+
+.nav-pills-custom .nav-link {
+    color: #1c1f23;
+    background: #e9ecef;
+    position: relative;
+}
+
+    .nav-pills-custom .nav-link.active {
+        color: #fff;
+        background: #1c1f23;
+    }
+
+@media(max-width: 1200px) {
+    .card {
+        margin: 20px;
+    }
+}
+
+@media (max-width: 992px) {
+
+    .home-img {
+        display: none;
+        visibility: hidden
+    }
+
+    .home-text {
+        text-align: center;
+        width: 100%
+    }
+}
+
+@media (min-width: 993px) {
+    .home-img {
+        width: 400px;
+        height: auto
+    }
+}
+
+@media (min-width: 1200px) {
+    .home-img {
+        width: 550px;
+        height: auto
+    }
+}

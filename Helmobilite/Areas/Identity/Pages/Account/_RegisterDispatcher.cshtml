@@ -1,0 +1,59 @@
+﻿@model RegisterModel
+
+<div>
+	<img src="~/images/dispatcher-icon-signup.png" class="img-fluid img-thumbnail rounded-circle mb-3" width="175" alt="avatar">
+</div>
+<h2 class="mb-3">@Role.Dispatcher.GetEnumDisplayName()</h2>
+
+<div asp-validation-summary="ModelOnly" class="text-danger custom-summary"></div>
+
+<div id="dispatcherForm">
+	<div class="form-floating">
+		<input asp-for="Input.DispatcherModel.Email" class="form-control mb-3" placeholder="Email" />
+		<label asp-for="Input.DispatcherModel.Email">Email</label>
+		<span asp-validation-for="Input.DispatcherModel.Email" class="text-danger text-start d-block"></span>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 mb-3">
+			<div class="form-floating">
+				<input asp-for="Input.DispatcherModel.Password" class="form-control mb-3" placeholder="Mot de passe">
+				<label asp-for="Input.DispatcherModel.Password">Mot de passe</label>
+				<span asp-validation-for="Input.DispatcherModel.Password" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+		<div class="col-md-6 mb-3">
+			<div class="form-floating">
+				<input asp-for="Input.DispatcherModel.ConfirmPassword" class="form-control mb-3" placeholder="Confirmation">
+				<label asp-for="Input.DispatcherModel.ConfirmPassword">Confirmation</label>
+				<span asp-validation-for="Input.DispatcherModel.ConfirmPassword" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+	</div>
+
+	<div class="form-floating mb-3">
+		<input asp-for="Input.DispatcherModel.Matricule" class="form-control mb-3" placeholder="Matricule">
+		<label asp-for="Input.DispatcherModel.Matricule">Matricule</label>
+		<span asp-validation-for="Input.DispatcherModel.Matricule" class="text-danger text-start d-block"></span>
+	</div>
+
+	<div class="row">
+		<div class="col-md-6 mb-3">
+			<div class="form-floating">
+				<input asp-for="Input.DispatcherModel.Name" class="form-control mb-3" placeholder="Nom">
+				<label asp-for="Input.DispatcherModel.Name">Nom</label>
+				<span asp-validation-for="Input.DispatcherModel.Name" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+		<div class="col-md-6 mb-3">
+			<div class="form-floating">
+				<input asp-for="Input.DispatcherModel.FirstName" class="form-control mb-3" placeholder="Prénom">
+				<label asp-for="Input.DispatcherModel.FirstName">Prénom</label>
+				<span asp-validation-for="Input.DispatcherModel.FirstName" class="text-danger text-start d-block"></span>
+			</div>
+		</div>
+	</div>
+
+	@Html.DropDownListFor(model => model.Input.DispatcherModel.Degree, Html.GetEnumSelectList<Degree>(), "-- Sélectionnez votre niveau d'étude --", new { @class = "form-select"})
+	<span asp-validation-for="Input.DispatcherModel.Degree" class="text-danger text-start d-block mb-3"></span>
+</div>

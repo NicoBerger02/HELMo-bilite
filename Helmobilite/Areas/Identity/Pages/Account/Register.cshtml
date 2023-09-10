@@ -1,0 +1,48 @@
+﻿@page
+@model RegisterModel
+@{
+	ViewData["Title"] = "Inscription";
+}
+
+<h1 class="text-center">@ViewData["Title"]</h1>
+
+<div class="row justify-content-center">
+	<div class="col-12 col-xl-6">
+		<div class="card my-2">
+			<form class="card-body p-lg-4 text-center" id="registerForm" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+				<input type="hidden" asp-for="Role" />
+
+				@if (Model.Role == Role.Dispatcher)
+				{
+					<partial name="_RegisterDispatcher" />
+				}
+				else if (Model.Role == Role.Chauffeur)
+				{
+					<partial name="_RegisterChauffeur" />
+				}
+				else
+				{
+					<partial name="_RegisterClient" />
+				}
+				<button id="registerSubmit" type="submit" class="w-100 btn btn-dark btn-lg mb-3">S'inscrire</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+@section Scripts {
+	<script>
+
+		$(function () {
+			$('[data-toggle="tooltip"]').tooltip()
+		})
+
+		$("#license_C").change(function () {
+			$("#license_C").prop("checked", true)
+			$("#licenseTip").tooltip('show');
+		});
+
+	</script>
+
+	<partial name="_ValidationScriptsPartial" />
+}

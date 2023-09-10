@@ -1,0 +1,33 @@
+﻿@inject UserManager<ApplicationUser> UserManager
+@{
+	if (ViewData.TryGetValue("ParentLayout", out var parentLayout) && parentLayout != null)
+	{
+		Layout = parentLayout.ToString();
+	}
+	else
+	{
+		Layout = "/Areas/Identity/Pages/_Layout.cshtml";
+	}
+
+	var user = await UserManager.GetUserAsync(User);
+	var role = await UserManager.GetRolesAsync(user);
+	var picture = user.ImageName != null ? user.ImageName : role.Contains(nameof(Role.Client)) ? "default-icon-logo.png" : "default-icon-user.png";
+
+}
+<h1>Modifier votre compte</h1>
+<hr />
+<div class="row">
+	<div class="col-md-3">
+		<div class="text-center">
+			<img class="mb-3 img-fluid img-thumbnail rounded-circle" src="~/images/uploads/users/@picture" alt="Photo de profil" width="150" />
+		</div>
+		<partial name="_ManageNav" />
+	</div>
+	<div class="col-md-9">
+		@RenderBody()
+	</div>
+</div>
+
+@section Scripts {
+	@RenderSection("Scripts", required: false)
+}

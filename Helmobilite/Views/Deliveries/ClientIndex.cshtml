@@ -1,0 +1,25 @@
+﻿@using Helmobilite.Models
+
+@model IEnumerable<Delivery>
+
+@{
+	ViewData["Title"] = "Demandes de livraisons";
+	ViewData["ShowStatus"] = true;
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="_AntiCsrfTokenPartial"/>
+
+<h1>@ViewData["Title"]</h1>
+
+<div class="float-end mb-3">
+	<a class="btn btn-dark" asp-controller="Deliveries" asp-action="Create">
+		Nouvelle livraison <i class="fas fa-plus"></i>
+	</a>
+</div>
+
+<partial name="_ClientTableDeliveriesPartial" />
+
+@section Scripts {
+	<script src="~/js/client-delivery-modal.js"></script>
+}

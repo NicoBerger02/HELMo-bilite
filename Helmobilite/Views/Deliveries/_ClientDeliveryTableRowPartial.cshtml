@@ -1,0 +1,35 @@
+﻿@model Delivery
+
+<tr class="@(Model.Status == Status.FAILED ? "table-danger" : Model.Status == Status.DONE ? "table-success" : null)">
+	<td>
+		<ul class="list-unstyled">
+			<li><strong>Lieu : </strong>@Html.DisplayFor(modeldelivery => Model.LoadingPlace)</li>
+			<li><strong>Date : </strong>@Html.DisplayFor(modeldelivery => Model.LoadingDateTime)</li>
+		</ul>
+	</td>
+	<td>
+		<ul class="list-unstyled">
+			<li><strong>Lieu : </strong>@Html.DisplayFor(modeldelivery => Model.UnloadingPlace)</li>
+			<li><strong>Date : </strong>@Html.DisplayFor(modeldelivery => Model.UnloadingDateTime)</li>
+		</ul>
+	</td>
+	<td>
+		@Html.DisplayFor(modeldelivery => Model.Content)
+	</td>
+	@if (ViewData.ContainsKey("ShowStatus"))
+	{
+		<td>
+			@Model.Status.GetEnumDisplayName()
+		</td>
+	}
+	<td>
+		@if (Model.Status == Status.WAITING)
+		{
+			<a class="btn btn-dark" asp-controller="Deliveries" asp-action="Edit" asp-route-id="@Model.Id"><i class="fas fa-pen"></i></a>
+		}
+		else
+		{
+			<button class="btn btn-dark" onclick="showDeliveryDetails('@Model.Id')"><i class="fas fa-plus-square"></i></button>
+		}
+	</td>
+</tr>

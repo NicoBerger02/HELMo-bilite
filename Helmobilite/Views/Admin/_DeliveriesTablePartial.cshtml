@@ -1,0 +1,46 @@
+﻿@using Helmobilite.Models.ViewModels
+
+@model IEnumerable<DeliveryViewModel>
+
+@if (Model.Count() == 0)
+{
+	<p class="text-center">Aucune livraison trouvée</p>
+}
+else
+{
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">
+					@Html.ActionLink("Date de chargement", "Statistics", new { sortOrder = ViewBag.DateSort, filterClient = ViewBag.FilterClient, filterChauffeur = ViewBag.FilterChauffeur, filterDate = ViewBag.FilterDate }, new { @class = "action-link" })
+					 <i class="fas fa-sort"></i>
+				</th>
+				<th scope="col">
+					@Html.ActionLink("Client", "Statistics", new { sortOrder = ViewBag.ClientSort, filterClient = ViewBag.FilterClient, filterChauffeur = ViewBag.FilterChauffeur, filterDate = ViewBag.FilterDate }, new { @class = "action-link" })
+					 <i class="fas fa-sort"></i>
+				</th>
+				<th scope="col">
+					@Html.ActionLink("Chauffeur", "Statistics", new { sortOrder = ViewBag.ChauffeurSort, filterClient = ViewBag.FilterClient, filterChauffeur = ViewBag.FilterChauffeur, filterDate = ViewBag.FilterDate }, new { @class = "action-link" })
+					 <i class="fas fa-sort"></i>
+				</th>
+				<th scope="col">
+					@Html.ActionLink("Statut", "Statistics", new { sortOrder = ViewBag.StatusSort, filterClient = ViewBag.FilterClient, filterChauffeur = ViewBag.FilterChauffeur, filterDate = ViewBag.FilterDate }, new { @class = "action-link" })
+					<i class="fas fa-sort"></i>
+				</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var delivery in Model)
+			{
+				<tr class="@(delivery.Status == Status.DONE ? "table-success" : "table-danger")">
+					<td>@delivery.Date</td>
+					<td>@delivery.ClientEnterprise</td>
+					<td>@delivery.Chauffeur</td>
+					<td>@delivery.Status.GetEnumDisplayName()</td>
+				</tr>
+			}
+		</tbody>
+	</table>
+}
+
+

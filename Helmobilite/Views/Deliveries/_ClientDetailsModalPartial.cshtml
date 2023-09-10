@@ -1,0 +1,63 @@
+﻿@using Helmobilite.Models
+
+@model Delivery
+
+@{
+	var chauffeur = Model.Chauffeur;
+	var chauffeurName = chauffeur != null ? chauffeur.DisplayFirstName : "Chauffeur inconnu";
+}
+
+
+<div class="modal fade" id="detailsModal" tabindex="-1" role="dialog" aria-labelledby="detailsModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="detailsModalLabel">Détails de la livraison</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<dl class="row">
+					<dt class="col-lg-4">
+						Chargement
+					</dt>
+					<dd class="col-lg-8">
+						<ul class="list-unstyled">
+							<li><strong>Lieu : </strong>@Html.DisplayFor(model => model.LoadingPlace)</li>
+							<li><strong>Date : </strong>@Html.DisplayFor(model => model.LoadingDateTime)</li>
+						</ul>
+					</dd>
+					<dt class="col-lg-4">
+						Déchargement
+					</dt>
+					<dd class="col-lg-8">
+						<ul class="list-unstyled">
+							<li><strong>Lieu : </strong>@Html.DisplayFor(model => model.UnloadingPlace)</li>
+							<li><strong>Date : </strong>@Html.DisplayFor(model => model.UnloadingDateTime)</li>
+						</ul>
+					</dd>
+					<dt class="col-lg-4">
+						@Html.DisplayNameFor(model => model.Content)
+					</dt>
+					<dd class="col-lg-8">
+						@Html.DisplayFor(model => model.Content)
+					</dd>
+					<dt class="col-lg-4">
+						@Html.DisplayNameFor(model => model.Status)
+					</dt>
+					<dd class="col-lg-8">
+						@Html.DisplayFor(model => model.Status)
+					</dd>
+					<dt class="col-lg-4">
+						Livraison assurée par
+					</dt>
+					<dd class="col-lg-8">
+						@chauffeurName
+					</dd>
+				</dl>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+			</div>
+		</div>
+	</div>
+</div>

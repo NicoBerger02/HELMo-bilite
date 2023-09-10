@@ -1,0 +1,72 @@
+﻿@model IEnumerable<Helmobilite.Models.Delivery>
+
+@{
+	ViewData["Title"] = "Livraisons en attente";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1 class="h1 mb-3 text-center text-lg-start">@ViewData["Title"]</h1>
+<hr />
+<div class="d-flex justify-content-center justify-content-lg-end">
+	<a type="button" class="btn btn-dark mb-3" asp-action="DispatcherIndex">
+		<i class="fas fa-refresh"></i> | Nouvelles demandes de livraisons
+	</a>
+</div>
+
+@if (ViewBag.ErrorMessage != null)
+{
+	<div class="row justify-content-center">
+		<div class="col-10 alert alert-danger alert-dismissible" role="alert">
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			@ViewBag.ErrorMessage
+		</div>
+	</div>
+}
+@if (ViewBag.SuccessMessage != null)
+{
+	<div class="row justify-content-center">
+		<div class="col-10 alert alert-success alert-dismissible" role="alert">
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			@ViewBag.SuccessMessage
+		</div>
+	</div>
+}
+
+<div class="row">
+	@foreach (var delivery in Model)
+	{
+		<div class="col-12 col-lg-6 col-xl-4 mb-3">
+			<div class="card h-100 bg-light">
+				<div class="text-center">
+					<img class="my-2 dispatcher-client-logo img-fluid img-thumbnail rounded-circle" src="~/images/uploads/users/@(delivery.Client.ImageName ?? "default-icon-logo.png")" alt="Logo de l'entreprise">
+				</div>
+				<div class="card-body">
+					<h5 class="card-title text-center">@delivery.Client.Enterprise</h5>
+					<ul class="list-group">
+						<li class="list-group-item list-group-item-light">
+							<h6 class="h6">Chargement</h6>
+							<ul class="list-unstyled">
+								<li>Lieu : @delivery.LoadingPlace</li>
+								<li>Date : @delivery.LoadingDateTime</li>
+							</ul>
+						</li>
+						<li class="list-group-item list-group-item-light">
+							<h6 class="h6">Déchargement</h6>
+							<ul class="list-unstyled">
+								<li>Lieu : @delivery.UnloadingPlace</li>
+								<li>Date : @delivery.UnloadingDateTime</li>
+							</ul>
+						</li>
+						<li class="list-group-item list-group-item-light">
+							<h6 class="h6">Contenu</h6>
+							<p>@delivery.Content</p>
+						</li>
+					</ul>
+				</div>
+				<div class="card-footer bg-transparent">
+					<a role="button" class="btn btn-dark w-100 @(delivery.Client.IsBadPayer ? "disabled" : "")" asp-action="DispatcherAssignChauffeur" asp-route-deliveryId="@delivery.Id" aria-disabled="@(delivery.Client.IsBadPayer ? "true" : false)">Assigner un chauffeur</a>
+				</div>
+			</div>
+		</div>
+	}
+</div>

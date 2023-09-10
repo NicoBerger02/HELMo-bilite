@@ -1,0 +1,18 @@
+﻿@model Helmobilite.Models.ViewModels.ChauffeurSucceededDeliveryModel
+
+<hr />
+@using (Html.BeginForm("SucceededDelivery", "Deliveries", FormMethod.Post))
+{
+	<div class="row justify-content-center">
+		<input type="hidden" asp-for="@Model.DeliveryId" />
+
+		<input type="hidden" asp-for="@Model.WeekOffset" />
+
+		<div class="mb-3 col-lg-8">
+			<label asp-for="Comment" class="form-label">Veuillez entrer un commentaire :</label>
+			<textarea asp-for="Comment" class="form-control" rows="5"></textarea>
+		</div>
+
+		<button type="submit" class="btn btn-dark col-6">Valider</button>
+	</div>
+}

@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Chauffeur>
+
+@{
+	ViewData["Title"] = "Liste des chauffeurs";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<partial name="_AntiCsrfTokenPartial" />
+
+<h1 class="mb-3">@ViewData["Title"]</h1>
+
+<div class="row">
+	@foreach (var chauffeur in Model)
+	{
+		<div class="col-12 col-lg-6 col-xl-4 mb-3">
+			<div class="card h-100 bg-light">
+				<div class="text-center">
+					<img class="my-2 truck-logo img-fluid img-thumbnail rounded-circle" src="~/images/uploads/users/@(chauffeur.ImageName ?? "default-icon-user.png")" alt="Photo de profil">
+				</div>
+				<div class="card-body">
+					<h5 class="card-title text-center">@chauffeur.Matricule</h5>
+					<ul class="list-group">
+						<li class="list-group-item list-group-item-light">
+							<h6 class="h6">Email</h6>
+							<p>@Html.DisplayFor(modelItem => chauffeur.Email)</p>
+						</li>
+						<li class="list-group-item list-group-item-light">
+							<h6 class="h6">Nom</h6>
+							<p>@chauffeur.DisplayFirstName</p>
+						</li>
+						<li class="list-group-item list-group-item-light">
+							<h6 class="h6">Date de naissance</h6>
+							<p>@chauffeur.DisplayBirthDate</p>
+						</li>
+						<li class="list-group-item list-group-item-light">
+							<h6 class="h6">Permis</h6>
+							<p>@chauffeur.GetLicensesToString()</p>
+						</li>
+					</ul>
+				</div>
+				<div class="card-footer bg-transparent">
+					<div class="row justify-content-center">
+						<button class="btn btn-dark col-8" onclick="getChauffeurLicensesForm('@chauffeur.Id')">Gérer les permis</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	}
+</div>
+
+<div id="modalPartial">
+</div>
+
+@section Scripts {
+	<script src="~/js/admin-licenses-management.js"></script>
+}
+

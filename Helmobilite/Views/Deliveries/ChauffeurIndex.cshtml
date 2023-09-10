@@ -1,0 +1,61 @@
+﻿@model Helmobilite.Models.ViewModels.DeliveriesPerWeekModel
+
+<partial name="_AntiCsrfTokenPartial" />
+
+<h1 class="h1 m-2">Mes Livraisons</h1>
+
+<div class="text-center">
+	<div class="btn-group" role="group" aria-label="Week Picker">
+		<a asp-action="ChauffeurIndex" asp-route-weekOffset="@(Model.WeekOffset-1)" type="button" class="btn btn-secondary"><i class="fa-solid fa-chevron-left"></i></a>
+		<a asp-action="ChauffeurIndex" type="button" asp-route-weekOffset="0" class="btn btn-secondary">Aujourd'hui</a>
+		<a asp-action="ChauffeurIndex" type="button" asp-route-weekOffset="@(Model.WeekOffset+1)" class="btn btn-secondary"><i class="fa-solid fa-chevron-right"></i></a>
+	</div>
+</div>
+
+<div class="table-responsive p-3">
+	<table class="table table-bordered text-center">
+		<thead>
+			<tr class="bg-light">
+				@foreach (var date in Model.DeliveriesPerDate.Keys)
+				{
+					<th class="text-uppercase">@date.ToString("ddd d MMMM")</th>
+				}
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				@foreach (var deliveries in Model.DeliveriesPerDate.Values)
+				{
+					if (deliveries.Count == 0)
+					{
+						<td>
+							<p>Aucune livraison</p>
+						</td>
+					}
+					else
+					{
+						foreach (var delivery in deliveries)
+						{
+							<td>
+								<div role="button" class="clickable mb-3 rounded-1 border border-dark p-2 @(delivery.Status == Status.ONGOING ? "btn-light" : delivery.Status == Status.FAILED ? "btn-danger" : "btn-success")" data-id="@delivery.Id" data-weekoffset="@Model.WeekOffset">
+									<span><strong>@delivery.LoadingDateTime.ToString("t")</strong> - <strong>@delivery.UnloadingDateTime.ToString("t")</strong></span>
+								</div>
+							</td>
+						}
+					}
+				}
+			</tr>
+		</tbody>
+	</table>
+</div>
+
+<div id="modalPartial">
+</div>
+
+@section Scripts {
+
+	<script src="~/js/chauffeur_index.js"></script>
+	@{
+		await Html.RenderPartialAsync("_ValidationScriptsPartial");
+	}
+}

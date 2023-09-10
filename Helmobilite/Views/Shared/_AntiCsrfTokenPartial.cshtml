@@ -1,0 +1,9 @@
+﻿@inject Microsoft.AspNetCore.Antiforgery.IAntiforgery csrf
+@functions {
+	public string GetAntiCsrfToken()
+	{
+		return csrf.GetAndStoreTokens(Context).RequestToken;
+	}
+}
+
+<input type="hidden" id="RequestCsrfToken" name="RequestCsrfToken" value="@GetAntiCsrfToken()" />

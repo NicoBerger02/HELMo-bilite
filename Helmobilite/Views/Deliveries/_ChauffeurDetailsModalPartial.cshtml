@@ -1,0 +1,94 @@
+﻿@model Helmobilite.Models.ViewModels.ChauffeurDeliveryModel
+
+<div class="modal fade" id="deliveryModal" tabindex="-1" role="dialog" aria-labelledby="deliveryModalLabel" aria-hidden="true">
+	<div class="modal-dialog modal-lg" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="deliveryModallLabel">Détails de la livraison</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				<dl class="row">
+					<dt class="col-sm-4">
+						Client
+					</dt>
+					<dd class="col-sm-8">
+						<ul class="list-unstyled">
+							<li><strong>Entreprise : </strong>@Html.DisplayFor(model => model.ClientEnterprise)</li>
+							<li><strong>Adresse : </strong>@Html.DisplayFor(model => model.ClientAddress)</li>
+							<li><strong>Contact : </strong>@Html.DisplayFor(model => model.ClientEmail)</li>
+						</ul>
+
+					</dd>
+					<dt class="col-sm-4">
+						Chargement
+					</dt>
+					<dd class="col-sm-8">
+						<ul class="list-unstyled">
+							<li><strong>Lieu : </strong>@Html.DisplayFor(model => model.LoadingPlace)</li>
+							<li><strong>Date : </strong>@Html.DisplayFor(model => model.LoadingDateTime)</li>
+						</ul>
+					</dd>
+					<dt class="col-sm-4">
+						Déchargement
+					</dt>
+					<dd class="col-sm-8">
+						<ul class="list-unstyled">
+							<li><strong>Lieu : </strong>@Html.DisplayFor(model => model.UnloadingPlace)</li>
+							<li><strong>Date : </strong>@Html.DisplayFor(model => model.UnloadingDateTime)</li>
+						</ul>
+					</dd>
+					<dt class="col-sm-4">
+						Contenu
+					</dt>
+					<dd class="col-sm-8">
+						@Html.DisplayFor(model => model.Content)
+					</dd>
+					<dt class="col-sm-4">
+						Camion
+					</dt>
+					<dd class="col-sm-8">
+						@Html.DisplayFor(m => m.Truck)
+					</dd>
+					<dt class="col-sm-4">
+						Statut
+					</dt>
+					<dd class="col-sm-8">
+						@Html.DisplayFor(m => m.Status)
+					</dd>
+					@if (Model.Status == Status.ONGOING)
+					{
+						<dd>
+							<div class="row justify-content-around m-3">
+								<button class="btn btn-success col-5" onclick="getDeliverySucceededForm('@Model.DeliveryId', '@Model.WeekOffset')">Livraison effectuée</button>
+								<button class="btn btn-danger col-5" onclick="getDeliveryFailedForm('@Model.DeliveryId', '@Model.WeekOffset')">Livraison ratée</button>
+							</div>
+							<div id="formPartial">
+							</div>
+						</dd>
+					}
+					else
+					{
+						if (Model.Status == Status.DONE)
+						{
+							<dt class="col-sm-4">
+								Commentaire
+							</dt>
+							<dd class="col-sm-8">
+								@Html.DisplayFor(model => model.Comment)
+							</dd>
+						} else
+						{
+							<dt class="col-sm-4">
+								Motif
+							</dt>
+							<dd class="col-sm-8">
+								@Html.DisplayFor(model => model.Motif)
+							</dd>
+						}
+					}
+				</dl>
+			</div>
+		</div>
+	</div>
+</div>

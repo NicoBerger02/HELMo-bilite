@@ -1,0 +1,19 @@
+﻿@model Truck
+
+<div class="modal fade" id="confirmDeletion-@Model.Id" tabindex="-1" aria-labelledby="confirmDeletion-@(Model.Id)Label" aria-hidden="true">
+	<div class="modal-dialog modal-dialog-centered">
+		<div class="modal-content">
+			<div class="modal-header">
+				<h5 class="modal-title" id="confirmDeletion-@(Model.Id)Label">Confirmation de la suppression</h5>
+				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+			</div>
+			<div class="modal-body">
+				Êtes-vous sûr(e) de vouloir supprimer le camion de la flotte ?
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+				<a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model.Id">Supprimer</a>
+			</div>
+		</div>
+	</div>
+</div>

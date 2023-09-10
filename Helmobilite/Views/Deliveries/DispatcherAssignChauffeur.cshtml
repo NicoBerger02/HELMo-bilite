@@ -1,0 +1,36 @@
+﻿@using Helmobilite.Models.ViewModels
+
+@model ChauffeurAssignmentModel
+
+@{
+	ViewData["Title"] = "Assigner un chauffeur";
+}
+
+<partial name="_AntiCsrfTokenPartial"/>
+
+<h1 class="text-center mb-3">@ViewData["Title"]</h1>
+
+<div class="row justify-content-center">
+	<div class="col-12 col-md-8 col-xl-6">
+		@using (Html.BeginForm("AssignChauffeur", "Deliveries", FormMethod.Post))
+		{
+			<input type="hidden" asp-for="@Model.DeliveryId" />
+
+            @Html.DropDownListFor(model => model.SelectedChauffeurId, Model.AvailableChauffeurs.Select(c => new SelectListItem { Value = c.Id, Text = c.NameWithMatricule }), "-- Sélectionnez un chauffeur --", new { @class = "form-select mb-3", @id = "chauffeursList" })
+			<span asp-validation-for="SelectedChauffeurId" class="text-danger text-start d-block mb-3"></span>
+
+			@Html.DropDownListFor(model => model.SelectedTruckId, new List<SelectListItem>(), "-- Sélectionnez un camion --", new { @class = "form-select mb-3", @id = "trucksList" })
+			<span asp-validation-for="SelectedTruckId" class="text-danger text-start d-block mb-3"></span>
+
+			<button type="submit" class="w-100 btn btn-dark btn-lg mb-3">Enregistrer</button>
+		}
+		<a class="btn mt-3" asp-action="DispatcherIndex"><i class="fas fa-arrow-left"></i> Retour</a>
+	</div>
+</div>
+
+@section Scripts {
+    <script src="~/js/assign-chauffeur.js"></script>
+	@{
+		<partial name="_ValidationScriptsPartial" />
+	}
+}

@@ -1,0 +1,45 @@
+﻿@using Helmobilite.Models
+@model IEnumerable<Delivery>
+
+@if (!Model.Any())
+{
+	<p class="text-center mt-5">Aucune livraison trouvée</p>
+}
+else
+{
+	<table class="table table-responsive align-middle">
+		<thead class="table-light">
+			<tr>
+				<th>
+					Chargement
+				</th>
+				<th>
+					Déchargement
+				</th>
+				<th>
+					@Html.DisplayNameFor(model => model.Content)
+				</th>
+				@if (ViewData.ContainsKey("ShowStatus"))
+				{
+					<th>
+						Statut
+					</th>
+				}
+				<th></th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach (var delivery in Model)
+			{
+				<partial name="_ClientDeliveryTableRowPartial" model="@delivery" />
+			}
+		</tbody>
+	</table>
+
+	<div id="modalPartial">
+	</div>
+}
+
+@section Scripts {
+	<script src="~/js/client-delivery-modal.js"></script>
+}
